@@ -14,27 +14,31 @@ var bot_circularInterval = setInterval(function() {
 				tempPos.x += Math.cos(circularDirection) / (100 - gameSpeed);
 				tempPos.y += Math.sin(circularDirection) / (100 - gameSpeed);
 			}
-			bot_originLoc = circularChar.p;
+            bot_originLoc = Object.assign({}, circularChar).p % Math.PI;
 			bot_movingTo = (Math.atan2(tempPos.y, tempPos.x));
 		}
         distance = Math.abs(bot_originLoc - bot_movingTo) % Math.PI;
 		if(bot_originLoc - bot_movingTo < 0) {
 			if((bot_originLoc - circularChar.p) <= (distance/2)) {
-				keyboard.l = true;
+                keyboard.r = true;
+				keyboard.l = false;
 			} else {
+                keyboard.r = false;
 				keyboard.l = false;
 			}
 		} else {
 			if((bot_originLoc + circularChar.p) <= (distance/2)) {
-				keyboard.r = true;
+                keyboard.r = false;
+				keyboard.l = true;
 			} else {
-				keyboard.r = false;
+                keyboard.r = false;
+				keyboard.l = false;
 			}
 		}
         if (bot_movingTo) {
             console.log((bot_movingTo - circularChar.p) % Math.PI);
             console.log(bot_movingTo, circularChar.p)
-            if((bot_movingTo - circularChar.p) % Math.PI < 0.1 && (bot_movingTo - circularChar.p) % Math.PI > -0.1) {
+            if(((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) < 0.1 && ((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) > -0.1) {
                 console.log("Stopping")
                 bot_originLoc = null;
                 bot_movingTo = null;
