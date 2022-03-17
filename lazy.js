@@ -10,7 +10,7 @@ var bot_circularInterval = setInterval(function() {
 	}
 }, 1000 / 60);
 
-var bot_oneInterval = setInterval(function() {
+var bot_twoInterval = setInterval(function() {
 	if(inGame && gameIn == 0) {
 		if (ball.y < 3 && ball.y > -3) {
         		player2 = ball.y
