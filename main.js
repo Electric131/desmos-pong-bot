@@ -37,9 +37,9 @@ var bot_circularInterval = setInterval(function() {
 		}
         if (bot_movingTo) {
             console.log((bot_movingTo - circularChar.p) % Math.PI);
-            console.log(bot_movingTo, circularChar.p)
+            console.log(bot_movingTo, circularChar.p);
             if(((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) < 0.1 && ((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) > -0.1) {
-                console.log("Stopping")
+                console.log("Stopping");
                 bot_originLoc = null;
                 bot_movingTo = null;
                 keyboard.l = false;
