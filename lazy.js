@@ -7,5 +7,21 @@ var tempPos = {};
 var bot_circularInterval = setInterval(function() {
 	if(inGame && gameIn == 1) {
         circularChar.p = (Math.atan2(circlarPosition.y, circularPosition.x));
-    }
+	}
+}, 1000 / 60);
+
+var bot_oneInterval = setInterval(function() {
+	if(inGame && gameIn == 0) {
+		if (ball.y < 3 && ball.y > -3) {
+        		player2 = ball.y
+		}
+	}
+}, 1000 / 60);
+
+var bot_oneInterval = setInterval(function() {
+	if(inGame && gameIn == 2) {
+		if (ball.y < 3 && ball.y > -3) {
+        		player1 = ball.y
+		}
+	}
 }, 1000 / 60);
