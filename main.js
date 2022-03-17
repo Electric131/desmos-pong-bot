@@ -1,4 +1,6 @@
 // Made for a pong desmos script
+// https://github.com/johndoesstuff/randomProjects/blob/master/desmos%20pong.js
+// Add this to make it hit the ball automatically
 
 var tempPos = {};
 var distance = 0;
@@ -14,29 +16,36 @@ var bot_circularInterval = setInterval(function() {
 			}
 			bot_originLoc = circularChar.p;
 			bot_movingTo = (Math.atan2(tempPos.y, tempPos.x));
-/* 			console.log(bot_originLoc);
-			console.log(bot_movingTo);
-			      console.log(bot_originLoc - bot_movingTo); */
 		}
-    distance = Math.abs(bot_originLoc - bot_movingTo) % Math.PI;
+        distance = Math.abs(bot_originLoc - bot_movingTo) % Math.PI;
 		if(bot_originLoc - bot_movingTo < 0) {
-			if((bot_originLoc - circularChar.p) < (distance/2)) {
+			if((bot_originLoc - circularChar.p) <= (distance/2)) {
 				keyboard.l = true;
 			} else {
 				keyboard.l = false;
 			}
 		} else {
-			if((bot_originLoc + bot_movingTo) % Math.PI / 2 <= circularChar.p) {
+			if((bot_originLoc + circularChar.p) <= (distance/2)) {
 				keyboard.r = true;
 			} else {
 				keyboard.r = false;
 			}
 		}
-/* 		if((bot_originLoc - bot_movingTo) % Math.PI < 0.2) {
-		  bot_originLoc = null;
-		  bot_movingTo = null;
-		      keyboard.l = false;
-		      keyboard.r = false;
-		} */
-	}
+        if (bot_movingTo) {
+            console.log((bot_movingTo - circularChar.p) % Math.PI);
+            console.log(bot_movingTo, circularChar.p)
+            if((bot_movingTo - circularChar.p) % Math.PI < 0.1 && (bot_movingTo - circularChar.p) % Math.PI > -0.1) {
+                console.log("Stopping")
+                bot_originLoc = null;
+                bot_movingTo = null;
+                keyboard.l = false;
+                keyboard.r = false;
+            }
+		}
+	}else {
+        bot_originLoc = null;
+        bot_movingTo = null;
+        keyboard.l = false;
+        keyboard.r = false;
+    }
 }, 1000 / 60);
