@@ -8,54 +8,32 @@ if (typeof gameIn == 'undefined') {
   fetch('https://raw.githubusercontent.com/johndoesstuff/randomProjects/master/desmos%20pong.js').then(data=>data.text().then(function(text){var s=document.createElement("script");s.type ="text/javascript";s.text=text;document.body.appendChild(s);}));
 }
 
-var tempPos = {};
+var simBall = {};
 var distance = 0;
-var bot_movingTo = null;
-var bot_originLoc = null;
+var curreetVel = 0;
+var originLoc = null
+var goalLoc = null
 var bot_circularInterval = setInterval(function() {
-  if (inGame && gameIn == 1) {
-    if (!bot_movingTo) {
-      Object.assign(tempPos, circularPosition);
-      while (tempPos.x ** 2 + tempPos.y ** 2 < 0.95) {
-        tempPos.x += Math.cos(circularDirection) / (100 - gameSpeed);
-        tempPos.y += Math.sin(circularDirection) / (100 - gameSpeed);
+	if(inGame && gameIn == 1) {
+		if (gameSpeed >= 99) gotoMenu();
+		Object.assign(simBall, circularPosition);
+		while(simBall.x ** 2 + simBall.y ** 2 < 0.95) {
+		    simBall.x += Math.cos(circularDirection) / (100 - gameSpeed);
+		    simBall.y += Math.sin(circularDirection) / (100 - gameSpeed);
+		}
+    distance = Math.abs((Math.atan2(simBall.y, simBall.x) - circularChar.p) % (Math.PI * 2));
+    currentVel = Object.assign({}, circularPosition).vel
+    originLoc = Object.assign({}, circularPosition).p % (Math.PI * 2)
+    goalLoc = Object.assign({}, circularPosition).p % (Math.PI * 2)
+    if ((Math.atan2(simBall.y, simBall.x) - circularChar.p) % (Math.PI * 2) > Math.PI) {
+      // Go Right
+      while (Math.abs(Math.atan2(simBall.y, simBall.x) - goalLoc) < 0.1 && Math.abs(Math.atan2(simBall.y, simBall.x) - goalLoc) > 0.1) {
+        currentVel /= 1.1;
+        goalLoc += currentVel/75;
       }
-      bot_originLoc = Object.assign({}, circularChar).p % Math.PI;
-      bot_movingTo = (Math.atan2(tempPos.y, tempPos.x));
+    }else {
+      // Go Left
+
     }
-    distance = Math.abs(bot_originLoc - bot_movingTo) % Math.PI;
-    if (bot_originLoc - bot_movingTo < 0) {
-      if ((bot_originLoc - circularChar.p) <= (distance / 2)) {
-        keyboard.r = true;
-        keyboard.l = false;
-      } else {
-        keyboard.r = false;
-        keyboard.l = false;
-      }
-    } else {
-      if ((bot_originLoc + circularChar.p) <= (distance / 2)) {
-        keyboard.r = false;
-        keyboard.l = true;
-      } else {
-        keyboard.r = false;
-        keyboard.l = false;
-      }
-    }
-    if (bot_movingTo) {
-      console.log((bot_movingTo - circularChar.p) % Math.PI);
-      console.log(bot_movingTo, circularChar.p);
-      if (((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) < 0.1 && ((bot_movingTo - circularChar.p) + Math.PI) % (2 * Math.PI) > -0.1) {
-        console.log("Stopping");
-        bot_originLoc = null;
-        bot_movingTo = null;
-        keyboard.l = false;
-        keyboard.r = false;
-      }
-    }
-  } else {
-    bot_originLoc = null;
-    bot_movingTo = null;
-    keyboard.l = false;
-    keyboard.r = false;
-  }
+	}
 }, 1000 / 60);
