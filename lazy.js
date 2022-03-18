@@ -14,17 +14,13 @@ var bot_circularInterval = setInterval(function() {
 var bot_twoInterval = setInterval(function() {
 	if(inGame && gameIn == 0) {
 		if (gameSpeed >= 99) gotoMenu();
-		if (ball.y < 3 && ball.y > -3) {
-        		player2 = ball.y
-		}
+		player2 = Math.min(Math.max(ball.y, -3), 3).toFixed(1)
 	}
 }, 1000 / 60);
 
 var bot_oneInterval = setInterval(function() {
 	if(inGame && gameIn == 2) {
 		if (gameSpeed >= 99) gotoMenu();
-		if (ball.y < 3 && ball.y > -3) {
-        		player1 = ball.y
-		}
+		player1 = Math.min(Math.max(ball.y, -3), 3).toFixed(1)
 	}
 }, 1000 / 60);
