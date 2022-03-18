@@ -24,13 +24,27 @@ var bot_oneInterval = setInterval(function() {
 		while (simBall.x < 4) {
 			simBall.x += 3*simBall.xvel/(100-gameSpeed);
 			simBall.y += 3*simBall.yvel/(100-gameSpeed);
-			if (simBall.x > 4) {
-				simBall.xvel = -1;
-				simBall.yvel = 3*Math.random()-1.5;
-			};
 			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
 			if (simBall.x < -4) simBall.xvel = 1;
 		}
-		player1 = Math.min(Math.max(simBall.y, -3), 3);
+		player1 = Math.min(Math.max(simBall.y, -3), 3).toFixed(1);
+	}
+}, 1000 / 60);
+
+var simBall = {};
+var bot_twoInterval = setInterval(function() {
+	if(inGame && gameIn == 0) {
+		if (gameSpeed >= 99) gotoMenu();
+		Object.assign(simBall, ball);
+		while (simBall.x < 4) {
+			simBall.x += 3*simBall.xvel/(100-gameSpeed);
+			simBall.y += 3*simBall.yvel/(100-gameSpeed);
+			if (simBall.x < -4) {
+				simBall.xvel = 1;
+				simBall.yvel = 3*Math.random()-1.5;
+			};
+			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
+		}
+		if (ball.xvel > 0) player2 = Math.min(Math.max(simBall.y, -3), 3).toFixed(1);
 	}
 }, 1000 / 60);
