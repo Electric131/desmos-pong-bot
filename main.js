@@ -51,7 +51,7 @@ var bot_oneInterval = setInterval(function() {
 			if (simBall.x < -4) simBall.xvel = 1;
 		}
     distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1)
-    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.1) {
+    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.4) {
       player1 += 0.1;
     }else if(ball.xvel > 0) {
       player1 -= 0.1;
@@ -75,7 +75,7 @@ var bot_twoInterval = setInterval(function() {
 			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
 		}
     distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2);
-    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2 > 0 && distance > 0.1) {
+    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2 > 0 && distance > 0.4) {
       player2 += 0.1;
     }else if(ball.xvel > 0) {
       player2 -= 0.1;
