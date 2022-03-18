@@ -37,3 +37,48 @@ var bot_circularInterval = setInterval(function() {
     }
 	}
 }, 1000 / 60);
+
+var simBall = {};
+var distance = 0;
+var bot_oneInterval = setInterval(function() {
+	if(inGame && gameIn == 2) {
+		if (gameSpeed >= 99) gotoMenu();
+		Object.assign(simBall, ball);
+		while (simBall.x < 4) {
+			simBall.x += 3*simBall.xvel/(100-gameSpeed);
+			simBall.y += 3*simBall.yvel/(100-gameSpeed);
+			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
+			if (simBall.x < -4) simBall.xvel = 1;
+		}
+    distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1)
+    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.1) {
+      player1 += 0.1;
+    }else if(ball.xvel > 0) {
+      player1 -= 0.1;
+    }
+	}
+}, 1000 / 60);
+
+var simBall = {};
+var distance = 0;
+var bot_twoInterval = setInterval(function() {
+	if(inGame && gameIn == 0) {
+		if (gameSpeed >= 99) gotoMenu();
+		Object.assign(simBall, ball);
+		while (simBall.x < 4) {
+			simBall.x += 3*simBall.xvel/(100-gameSpeed);
+			simBall.y += 3*simBall.yvel/(100-gameSpeed);
+			if (simBall.x < -4) {
+				simBall.xvel = 1;
+				simBall.yvel = 3*Math.random()-1.5;
+			};
+			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
+		}
+    distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2);
+    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2 > 0 && distance > 0.1) {
+      player2 += 0.1;
+    }else if(ball.xvel > 0) {
+      player2 -= 0.1;
+    }
+	}
+}, 1000 / 60);
