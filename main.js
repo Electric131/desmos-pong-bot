@@ -2,6 +2,12 @@
 // https://github.com/johndoesstuff/randomProjects/blob/master/desmos%20pong.js
 // Add this to make it hit the ball automatically
 
+if (typeof gameIn == 'undefined') {
+  alert("Desmos Pong was not detected so it was loaded automatically.");
+  // Get the latest version of desmos pong
+  fetch('https://raw.githubusercontent.com/johndoesstuff/randomProjects/master/desmos%20pong.js').then(data=>data.text().then(function(text){var s=document.createElement("script");s.type ="text/javascript";s.text=text;document.body.appendChild(s);}));
+}
+
 var tempPos = {};
 var distance = 0;
 var bot_movingTo = null;
