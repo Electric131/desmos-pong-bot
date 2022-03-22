@@ -12,7 +12,6 @@ if (typeof gameIn == 'undefined') {
 var simBall = {};
 var bot_circularInterval = setInterval(function() {
 	if(inGame && gameIn == 1) {
-		if (gameSpeed >= 99) gotoMenu();
 		Object.assign(simBall, circularPosition);
 		while(simBall.x ** 2 + simBall.y ** 2 < 0.95) {
 		    simBall.x += Math.cos(circularDirection) / (100 - gameSpeed);
@@ -25,7 +24,6 @@ var bot_circularInterval = setInterval(function() {
 var simBall = {};
 var bot_oneInterval = setInterval(function() {
 	if(inGame && gameIn == 2) {
-		if (gameSpeed >= 99) gotoMenu();
 		Object.assign(simBall, ball);
 		while (simBall.x < 4) {
 			simBall.x += 3*simBall.xvel/(100-gameSpeed);
@@ -40,7 +38,6 @@ var bot_oneInterval = setInterval(function() {
 var simBall = {};
 var bot_twoInterval = setInterval(function() {
 	if(inGame && gameIn == 0) {
-		if (gameSpeed >= 99) gotoMenu();
 		Object.assign(simBall, ball);
 		while (simBall.x < 4) {
 			simBall.x += 3*simBall.xvel/(100-gameSpeed);
