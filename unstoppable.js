@@ -4,9 +4,9 @@
 // -- This version makes it impossible to lose by directly setting the position instead of using user controls
 
 if (typeof gameIn == 'undefined') {
-    alert("Desmos Pong was not detected so it was loaded automatically.");
+    alert("Desmos Pong was not detected so it was loaded automatically. (Infinite Speed Version)");
     // Get the latest version of desmos pong
-    fetch('https://raw.githubusercontent.com/johndoesstuff/randomProjects/master/desmos%20pong.js').then(data=>data.text().then(function(text){var s=document.createElement("script");s.type ="text/javascript";s.text=text;document.body.appendChild(s);}));
+    fetch('https://raw.githubusercontent.com/Electric131/desmos-pong-bot/main/infinite_speed_mod.js').then(data=>data.text().then(function(text){var s=document.createElement("script");s.type ="text/javascript";s.text=text;document.body.appendChild(s);}));
 }
 
 var simBall = {};
