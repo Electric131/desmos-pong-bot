@@ -53,7 +53,7 @@ var bot_oneInterval = setInterval(function() {
 		}
     distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1);
 	if (distance > .3) bot_OneSR = true;
-    if (Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.4 && bot_OneSR) {
+    if (Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && bot_OneSR) {
     	bot_OneSR = false;
 		player1 += 0.1;
     }else if(bot_OneSR) {
