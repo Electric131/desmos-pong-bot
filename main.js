@@ -40,6 +40,7 @@ var bot_circularInterval = setInterval(function() {
 
 var simBall = {};
 var distance = 0;
+var bot_OneSR = false;
 var bot_oneInterval = setInterval(function() {
 	if(inGame && gameIn == 2) {
 		if (gameSpeed >= 99) gotoMenu();
@@ -50,17 +51,21 @@ var bot_oneInterval = setInterval(function() {
 			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
 			if (simBall.x < -4) simBall.xvel = 1;
 		}
-    distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1)
-    if (Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.4) {
-      player1 += 0.1;
-    }else {
-      player1 -= 0.1;
+    distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1);
+	if (distance > .3) bot_OneSR = true;
+    if (Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player1 > 0 && distance > 0.4 && bot_OneSR) {
+    	bot_OneSR = false;
+		player1 += 0.1;
+    }else if(bot_OneSR) {
+		bot_OneSR = false;
+      	player1 -= 0.1;
     }
 	}
 }, 1000 / 60);
 
 var simBall = {};
 var distance = 0;
+var bot_TwoSR = false;
 var bot_twoInterval = setInterval(function() {
 	if(inGame && gameIn == 0) {
 		if (gameSpeed >= 99) gotoMenu();
@@ -75,10 +80,13 @@ var bot_twoInterval = setInterval(function() {
 			if (simBall.y > 4 || simBall.y < -4) simBall.yvel *= -1;
 		}
     distance = Math.abs(Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2);
-    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2 > 0 && distance > 0.4) {
-      player2 += 0.1;
-    }else if(ball.xvel > 0) {
-      player2 -= 0.1;
-    }
+	if (distance > .3) bot_TwoSR = true;
+    if (ball.xvel > 0 && Math.min(Math.max(simBall.y, -3), 3).toFixed(1) - player2 > 0 && bot_TwoSR) {
+		bot_TwoSR = false;
+		player2 += 0.1;
+    }else if(ball.xvel > 0 && bot_TwoSR) {
+		bot_TwoSR = false;
+      	player2 -= 0.1;
+    	}
 	}
 }, 1000 / 60);
