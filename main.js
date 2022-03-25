@@ -11,7 +11,6 @@ if (typeof gameIn == 'undefined') {
 var simBall = {};
 var distance = 0;
 var curreetVel = 0;
-var originLoc = null
 var goalLoc = null
 var bot_circularInterval = setInterval(function() {
 	if(inGame && gameIn == 1) {
@@ -21,20 +20,14 @@ var bot_circularInterval = setInterval(function() {
 		    simBall.x += Math.cos(circularDirection) / (100 - gameSpeed);
 		    simBall.y += Math.sin(circularDirection) / (100 - gameSpeed);
 		}
-    distance = Math.abs((Math.atan2(simBall.y, simBall.x) - circularChar.p) % (Math.PI * 2));
-    currentVel = Object.assign({}, circularPosition).vel
-    originLoc = Object.assign({}, circularPosition).p % (Math.PI * 2)
-    goalLoc = Object.assign({}, circularPosition).p % (Math.PI * 2)
-    if ((Math.atan2(simBall.y, simBall.x) - circularChar.p) % (Math.PI * 2) > Math.PI) {
-      // Go Right
-      while (Math.abs(Math.atan2(simBall.y, simBall.x) - goalLoc) < 0.1 && Math.abs(Math.atan2(simBall.y, simBall.x) - goalLoc) > 0.1) {
-        currentVel /= 1.1;
-        goalLoc += currentVel/75;
-      }
-    }else {
-      // Go Left
-
-    }
+		goalLoc = Math.atan2(simBall.y, simBall.x) % (Math.PI * 2);
+		distance = Math.abs((goalLoc - circularChar.p) % (Math.PI * 2));
+		// Too lazy to use velocity, so it just moves without vel  #lazy?
+		if (goalLoc - circularChar.p > 0) {
+			circularChar.p += distance/10;
+		}else {
+			circularChar.p -= distance/10;
+		}
 	}
 }, 1000 / 60);
 
